@@ -6,11 +6,15 @@
  * ============================================================================*/
 
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "questions.h"
 #include "util.h"
 using namespace std;
 
 int main() {
+	//get the system time for rand calls
+	srand(time(NULL));
 	bool exit = false;
 	int select;
 	while (exit == false) {

@@ -1,6 +1,7 @@
 /* Lo Shu Magic Square */
 
 #include <iostream>
+#include <algorithm>
 #include "util.h"
 using namespace std;
 
@@ -12,7 +13,7 @@ int MATRIX[3][3] = {
 };
 
 /*
- * This function accepts a multi dimensional vector of ints
+ * This function accepts a multi dimensional array of ints
  * The function displays it as a grid of numbers ex:
  *		 --- --- ---
  *		| 4 | 9 | 2 |
@@ -29,7 +30,7 @@ int MATRIX[3][3] = {
  *
  */
 
-void displayMatrix ( int matrix [3][3] ) {
+void displayMatrix ( int matrix[3][3]) {
 	for (int i = 0; i < 3; i++) {
 		cout << "	 --- --- ---\n";
 		cout << "	|";
@@ -67,14 +68,17 @@ bool goodSquare (int matrix[3][3]) {
 				return false;
 			} else {
 				range[matrix[i][j]-1] = +1;
-				//if any number appears more than once return false
-				if (range[matrix[i][j]] > 1) {
-					cout << "Bad Square\n";
-					return false;
-				}
 			}
 		}
 	}
+
+
+	for (int i = 0; i < 9; i++) {
+		if (range[i] < 1){
+			return false;
+		}
+	}
+
 	//if no issues found return true
 	return true;
 }
@@ -93,10 +97,6 @@ bool goodSquare (int matrix[3][3]) {
  *		false	returned if the array is not magic
  */
 bool isMagic (int matrix[3][3]) {
-	//check to see if the square is a good square
-	if (goodSquare(matrix) == false) {
-		return false;
-	}
 
 	//check the sum of first row
 	int testSum = 0;
@@ -134,15 +134,35 @@ bool isMagic (int matrix[3][3]) {
 }
 
 
-
 void magicSquareDriver () {
 	bool exit = false;
 	while (exit == false) {
 		cls();
+		//generate a matrix of numbers between 1 and 9 (inclusive)
+		int matrix[3][3];
+		//create an array of nums from 1 - 9
+		int array[9];
+		for (int i = 0; i < 9; i++) {
+			array[i] = i + 1;
+		}
+		//shuffle the array randomly
+		random_shuffle(begin(array), end(array));
+
+		//assign nums from array to matrix according to their position
+		for (int i =0; i < 9; i++) {
+			matrix[i/3][i%3] = array[i];
+		}
+
 		cout << "The square:\n";
-		displayMatrix(MATRIX);
-		if (isMagic(MATRIX) == true) {
-			cout << "Is a Magic Square\n\n";
+		displayMatrix(matrix);
+		if (goodSquare(matrix) == true) {
+			if (isMagic(matrix) == true) {
+				cout << "Is a Magic Square\n\n";
+			} else {
+				cout << "Is not magic\n\n";
+			}
+		} else {
+			cout << "Does not contain all the numbers from 1 - 9\n\n";
 		}
 		exit = exitPrompt();
 	}
