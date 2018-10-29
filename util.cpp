@@ -9,6 +9,8 @@
 
 #include <iostream>
 #include <limits>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
 /* Int input validation
@@ -108,4 +110,27 @@ bool exitPrompt () {
 	} else {
 		return false;
 	}
+}
+
+/*
+ * This function creates a vector of numbers that are either random or sequential
+ *
+ * Inputs
+ *	int size	The size of the vector to create
+ *	bool random	This is true if the ve3ctors should be filled with a random number
+ *
+ * Outputs
+ *	vector<int> nums	a vector of ints that are either random or sequential depending
+ *						on the value of random
+ */
+
+vector<int> genNums (int size, bool random) {
+	vector<int> nums(size);
+	for(int i; i < size; i++) {
+		nums[i] = i;
+	}
+	if (random == true) {
+		random_shuffle(begin(nums), end(nums));
+	}
+	return nums;
 }
