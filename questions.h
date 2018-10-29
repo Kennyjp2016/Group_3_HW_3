@@ -2,4 +2,5 @@
 #define questions_h
 void magicSquareDriver();
 void sortDriver ();
+void searchBenchDriver();
 #endif

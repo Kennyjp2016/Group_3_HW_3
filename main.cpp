@@ -23,9 +23,10 @@ int main() {
 		cout << "This is Group 3's Assignment 1\n";
 		cout << "\t1 Display Matrix\n";
 		cout << "\t2 Sort Bench Marks\n";
+		cout << "\t3 Search Bench Marks\n";
 		cout << "\n\n";
 		cout << "Enter your selection: ";
-		select = goodIn(0, 2);
+		select = goodIn(0, 3);
 
 		switch (select) {
 			case 1:
@@ -35,7 +36,7 @@ int main() {
 				sortDriver();
 				break;
 			case 3:
-				;
+				searchBenchDriver();
 				break;
 			case 4:
 				;

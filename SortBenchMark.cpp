@@ -70,15 +70,18 @@ void bubbleSort (vector<int> nums, int size) {
 void sortDriver () {
 	bool exit = false;
 	while ( exit == false) {
-		cout << "Generating random data of size 1000\n";
-		vector<int> numbers = genNums( 1000, true);
+		cls();
+		cout << "Enter the size of the array: ";
+		int size;
+		size = goodIn(1, 1000);
+		vector<int> numbers = genNums( size, true);
 		cout << "They are:\n";
 		for (int val : numbers) {
 			cout << val << " ";
 		}
 		cout << endl;
-		bubbleSort(numbers, 1000);
-		selectionSort(numbers, 1000);
+		bubbleSort(numbers, size);
+		selectionSort(numbers, size);
 		cout << endl;
 		exit = exitPrompt();
 	}
