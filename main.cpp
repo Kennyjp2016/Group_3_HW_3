@@ -26,7 +26,7 @@ int main() {
 		cout << "\t3 Search Bench Marks\n";
 		cout << "\n\n";
 		cout << "Enter your selection: ";
-		select = goodIn(0, 3);
+		select = goodIn(0, 4);
 
 		switch (select) {
 			case 1:
@@ -39,7 +39,7 @@ int main() {
 				searchBenchDriver();
 				break;
 			case 4:
-				;
+				TicTacToe();
 				break;
 			case 0:
 				;

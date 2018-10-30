@@ -3,4 +3,5 @@
 void magicSquareDriver();
 void sortDriver ();
 void searchBenchDriver();
+void TicTacToe();
 #endif
