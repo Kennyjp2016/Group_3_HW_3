@@ -24,6 +24,7 @@ int main() {
 		cout << "\t1 Display Matrix\n";
 		cout << "\t2 Sort Bench Marks\n";
 		cout << "\t3 Search Bench Marks\n";
+		cout << "\t4 Tic Tac Toe\n";
 		cout << "\n\n";
 		cout << "Enter your selection: ";
 		select = goodIn(0, 4);

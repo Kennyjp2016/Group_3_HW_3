@@ -61,7 +61,7 @@ void TicTacToe(){
 	int count = 0;
 	int player1move, player2move;
 	while (count < 5) {
-		
+
 		player1move = player1GetInput();
 
 		while (gameboard[player1move] != '*') { 
