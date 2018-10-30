@@ -113,6 +113,7 @@ bool exitPrompt () {
 	} else if (exit == 1) {
 		return false;
 	}
+	return false;
 }
 
 /*

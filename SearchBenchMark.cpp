@@ -29,6 +29,7 @@ int linearSearch (const vector<int> arr, int size, int value) {
 	}
 	cout << "It took " << comps << " comparisions to find\n";
 	outfile << "It took " << comps << " comparisions to find\n";
+	outfile.close();
 	return position;
 }
 

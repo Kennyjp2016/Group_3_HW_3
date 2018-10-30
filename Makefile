@@ -1,7 +1,7 @@
 SHELL = /bin/bash
 CC = g++
 CFLAGS = -g -Wall
-OUTP = main.o SearchBenchMark.o TicTacToe.o SortBenchMark.o LoShuMagicSquare.o util.o
+OUTP = main.o AnimalBusiness.o SearchBenchMark.o TicTacToe.o SortBenchMark.o LoShuMagicSquare.o util.o
 
 runMe: $(OUTP)
 		g++ $(CFLAGS) -o runMe $(OUTP)
@@ -20,6 +20,10 @@ SearchBenchMark.o: SearchBenchMark.cpp util.h
 
 TicTacToe.o: TicTacToe.cpp util.h
 	g++ -c TicTacToe.cpp
+
+AnimalBusiness.o: AnimalBusiness.cpp util.h
+	g++ -c AnimalBusiness.cpp
+
 
 util.o: util.cpp
 	g++ -c util.cpp
