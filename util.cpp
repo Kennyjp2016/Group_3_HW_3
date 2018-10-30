@@ -7,6 +7,9 @@
  *
  *  ===========================================================================*/
 
+#include <cstdlib>
+#include <cstdio>
+#include <stdlib.h>
 #include <iostream>
 #include <limits>
 #include <vector>
@@ -103,11 +106,11 @@ void cls() {
 
 bool exitPrompt () {
 	int exit;
-	cout << "Enter 0 to stay.\nEnter 1 to return to the main menu ";
-	exit = goodIn(0, 1);
-	if (exit == 1) {
+	cout << "\nEnter 1 to stay.\nEnter 2 to return to the main menu\n";
+	exit = goodIn(1, 2);
+	if (exit == 2) {
 		return true;
-	} else {
+	} else if (exit == 1) {
 		return false;
 	}
 }

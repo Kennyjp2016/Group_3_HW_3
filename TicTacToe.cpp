@@ -1,81 +1,152 @@
 #include <iostream>
+#include <vector>
+#include "util.h"
 using namespace std;
 
-char gameboard[9] = { '*', '*', '*', '*', '*', '*', '*', '*', '*' };
+vector<vector<char>> gameboard;
 
-void dispGameboard() {
-	int count;
-	count = 0;
-	cout << "\tA\tB\tC";
-	while (count < 9) {
-		if (count == 0) { cout << "\n" << '1'; }
-		else if (count == 3) { cout << "\n" << '2'; }
-		else if (count == 6) { cout << "\n" << '3'; }
-		cout << "\t" << gameboard[count];
-		count++;
+void dispGameboard( vector<vector<char>> matrix) {
+	cls();
+	cout << "\t  1   2   3\n";
+	for (int i = 0; i < 3; i++) {
+		cout << "\t --- --- ---\n";
+		cout << i + 1 << "\t|";
+		for (int j = 0; j < 3; j++) {
+			cout << " " << matrix [i][j] << " |";
+		}
+		cout << endl;
+	}
+	cout << "\t --- --- ---\n";
+}
+
+bool isEmpty (int row, int col) {
+	if (gameboard[row][col] == '*') {
+		return true;
+	} else {
+		cout << "That space is occupied. Please select a different space\n";
+		return false;
 	}
 }
 
-int LocationCalculation(int row, char column) {
-	int choice;
-	if ((row == 1) && (column == 'a')) choice = 0;
-	else if ((row == 1) && (column == 'b')) choice = 1;
-	else if ((row == 1) && (column == 'c')) choice = 2;
-	else if ((row == 2) && (column == 'a')) choice = 3;
-	else if ((row == 2) && (column == 'b')) choice = 4;
-	else if ((row == 2) && (column == 'c')) choice = 5;
-	else if ((row == 3) && (column == 'a')) choice = 6;
-	else if ((row == 3) && (column == 'b')) choice = 7;
-	else if ((row == 3) && (column == 'c')) choice = 8;
-	return choice;
+void playerMove (bool player) {
+	int row, col;
+	char p_symbol;
+	bool canPlace = false;
+	if (player) {
+		p_symbol = 'X';
+	} else {
+		p_symbol = 'O';
+	}
+	cout << "Player " << player + 1 << " enter the space you want to claim\n";
+	while (canPlace == false) {
+		cout << "Row:\t";
+		row = goodIn(1, 3);
+		cout << "Column:\t";
+		col = goodIn(1, 3);
+		row--;
+		col--;
+		canPlace = isEmpty(row, col);
+	}
+	gameboard[row][col] = p_symbol;
 }
 
-int player1GetInput() {
-	int choice, row;
-	char column;
-	dispGameboard();
-	cout << '\n' << "Player 1\n" << "Where would you like to go? Please type Row, then enter, then column, then enter. " << endl;
-	cin >> row >> column;
+/* This function iterates through all the rows/col/diag and checks to see if
+ * any are filled with nothing but X's or O's
+ * If any are victory is declared for the player who's symbol matches
+ */
 
-	choice = LocationCalculation(row, column);
-
-	return choice;
+bool checkVictory () {
+	//check the rows
+	for (int i = 0; i < 3; i++) {
+		if (gameboard[i][0] == gameboard[i][1] && gameboard[i][1] == gameboard[i][2]) {
+			if (gameboard[i][0] == 'O') {
+				cout << "Player 1 is Victorious !!!\n";
+				return true;
+			}
+			if (gameboard[i][0] == 'X') {
+				cout << " Player 2 is Victorious !!!\n";
+				return true;
+			}
+		}
+	}
+	//check the columns
+	for (int i = 0; i < 3; i++) {
+		if (gameboard[0][i] == gameboard[1][i] && gameboard[0][i] == gameboard[2][i]) {
+			if (gameboard[i][0] == 'O') {
+				cout << "Player 1 is Victorious !!!\n";
+				return true;
+			}
+			if (gameboard[i][0] == 'X') {
+				cout << "Player 2 is Victorious !!!\n";
+				return true;
+			}
+		}
+	}
+	//compare the diagonals
+	if (gameboard[1][1] != '*') {
+		if (gameboard[0][0] == gameboard[1][1] && gameboard[0][0] == gameboard[2][2]) {
+			if (gameboard[2][2] == 'O') {
+				cout << "Player 1 is Victorious !!!\n";
+			} else {
+				cout << "Player 2 is Victorious !!!\n";
+			}
+			return true;
+		}
+		if (gameboard[2][0] == gameboard[1][1] && gameboard[2][0] == gameboard[0][2]) {
+			if (gameboard[2][2] == 'O') {
+				cout << "Player 1 is Victorious !!!\n";
+			} else {
+				cout << "Player 2 is Victorious !!!\n";
+			}
+			return true;
+		}
+	}
+	return false;
 }
 
-int player2GetInput() {
-	int choice, row;
-	char column;
-	dispGameboard();
-	cout << "\n" << "Player 2\n" << "Where would you like to go? Please type Row, then enter, then column, then enter. " << endl;
-	cin >> row >> column;
-
-	choice = LocationCalculation(row, column);
-
-	return choice;
-}
-
-void checkWinner() {
-
+/* This function return true if none of the values in gameboard are = to a *
+ * this is in case of a tie
+ */
+bool isTie () {
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 3; j++) {
+			if (gameboard[i][j] == '*') {
+				return false;
+			}
+		}
+	}
+	return true;
 }
 void TicTacToe(){
-	int count = 0;
-	int player1move, player2move;
-	while (count < 5) {
-
-		player1move = player1GetInput();
-
-		while (gameboard[player1move] != '*') { 
-			cout << "Please use a location that has not been used yet" << endl; 
-			player1move = player1GetInput(); }
-
-		gameboard[player1move] = 'X';
-
-		player2move = player2GetInput();
-
-		while (gameboard[player2move] != '*') { 
-			cout << "Please use a location that has not been used yet" << endl;
-			player2move = player2GetInput(); }
-
-		gameboard[player2move] = 'O';
+	bool victory = false;
+	bool player = 1;
+	bool exit = false;
+	while (exit == false) {
+		//set up the board
+		gameboard.clear();
+		gameboard = {
+			{ '*', '*', '*'},
+			{ '*', '*', '*'},
+			{ '*', '*', '*'}
+		};
+		bool victory = false;
+		bool player = 0;
+		while (victory == false) {
+			dispGameboard( gameboard );
+			playerMove(player);
+			dispGameboard( gameboard );
+			victory = checkVictory();
+			//switch the player
+			if (player == 0) {
+				player = 1;
+			} else {
+				player = 0;
+			}
+			if (isTie() == true) {
+				cout << "A strange game. The only winning move is not to play. How about a nice game of chess?\n";
+				break;
+			}
+		}
+		exit = exitPrompt();
 	}
 }
