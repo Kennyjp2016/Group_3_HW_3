@@ -23,7 +23,7 @@ void animalBusiness () {
 		}
 		//get food eaten by each lion
 		for (int i = 0; i < LIONS; i++) {
-			cout << "How man lb's did lion " << i + 1 << " eat on\n";
+			cout << "How many lb's did lion " << i + 1 << " eat on\n";
 			for (int j = 0; j < DAYS; j++) {
 				cout << "Day " << j + 1 << ": ";
 				lionFood[i][j] = goodIn(MIN_FOOD, MAX_FOOD);
@@ -38,7 +38,7 @@ void animalBusiness () {
 			for (int j = 0; j < LIONS; j++) {
 				avg = avg + lionFood[j][i];
 			}
-			avg = avg/DAYS;
+			avg = avg/LIONS;
 			cout << avg << endl;
 		}
 

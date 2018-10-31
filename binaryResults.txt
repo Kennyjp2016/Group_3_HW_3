@@ -1,0 +1,4 @@
+The number was found at position 657
+It took 10 comparisions to find
+The number was found at position 452
+It took 10 comparisions to find

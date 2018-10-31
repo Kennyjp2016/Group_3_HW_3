@@ -130,7 +130,7 @@ bool exitPrompt () {
 
 vector<int> genNums (int size, bool random) {
 	vector<int> nums(size);
-	for(int i; i < size; i++) {
+	for(int i=0; i < size; i++) {
 		nums[i] = i;
 	}
 	if (random == true) {

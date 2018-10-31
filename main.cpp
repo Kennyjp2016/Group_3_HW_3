@@ -3,6 +3,9 @@
  *	due 8/30/18
  *
  *	James Conory
+ *	John Kenny
+ *	Carlene Farmer
+ *	Sam Kershner
  * ============================================================================*/
 
 #include <iostream>
